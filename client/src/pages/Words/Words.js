@@ -6,18 +6,18 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
-class Books extends Component {
+class Words extends Component {
   state = {
-    books: []
+    words: []
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadWordss();
   }
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res => this.setState({ books: res.data }))
+  loadWords = () => {
+    API.getWords()
+      .then(res => this.setState({ words: res.data }))
       .catch(err => console.log(err));
   };
 
@@ -27,26 +27,26 @@ class Books extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>My favorite words</h1>
             </Jumbotron>
             <form>
-              <Input name="title" placeholder="Title (required)" />
-              <Input name="author" placeholder="Author (required)" />
-              <TextArea name="synopsis" placeholder="Synopsis (Optional)" />
-              <FormBtn>Submit Book</FormBtn>
+              <Input name="word" placeholder="Word (required)" />
+              <Input name="meaning" placeholder="Meaning (required)" />
+              <TextArea name="link" placeholder="Link (required)" />
+              <FormBtn>Submit Word</FormBtn>
             </form>
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Words On My List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.words.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
+                {this.state.words.map(words => (
+                  <ListItem key={words._id}>
+                    <a href={"/words/" + words._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {words.word} by {words.meaning}
                       </strong>
                     </a>
                     <DeleteBtn />
@@ -63,4 +63,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Words;
